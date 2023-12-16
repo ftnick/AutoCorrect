@@ -1,5 +1,5 @@
-import os
 import requests
+import os
 import configparser
 from pymsgbox import *
 from io import BytesIO
@@ -13,6 +13,11 @@ from googletrans import Translator, LANGUAGES
 
 
 print("Awaiting...", tag='IDLE', tag_color='cyan')
+
+def exit(type):
+    alert(text='Script Error', title='ERR', button='OK')
+    os._exit(1)
+    
 
 def GetConfig(section, setting):
     config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.iin"
