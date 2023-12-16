@@ -15,7 +15,7 @@ from googletrans import Translator, LANGUAGES
 print("Awaiting...", tag='IDLE', tag_color='cyan')
 
 def GetConfig(section, setting):
-    config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.ini"
+    config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.iin"
 
     try:
         response = requests.get(config_url)
