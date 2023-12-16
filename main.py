@@ -1,5 +1,4 @@
 import os
-os.system("cls")
 import requests
 import configparser
 from pymsgbox import *
