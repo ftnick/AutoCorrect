@@ -20,7 +20,7 @@ def exit(type):
     
 
 def GetConfig(section, setting):
-    config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.iin"
+    config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.ini"
 
     try:
         response = requests.get(config_url)
