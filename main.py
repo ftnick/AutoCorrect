@@ -10,6 +10,7 @@ import tkinter as tk
 import time
 from print_color import print
 from googletrans import Translator, LANGUAGES
+from fetch_module import Download
 
 
 print("Awaiting...", tag='IDLE', tag_color='cyan')
@@ -18,10 +19,9 @@ def exit(type):
     alert(text='Script Error', title='ERR', button='OK')
     os._exit(1)
     
+config_url = Download("https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.ini", ".ini")
 
 def GetConfig(section, setting):
-    config_url = "https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.ini"
-
     try:
         response = requests.get(config_url)
         response.raise_for_status()
@@ -190,16 +190,17 @@ if __name__ == "__main__":
     root = tk.Tk()
   
     icon_url = GetConfig("FileURLS", "IconFile")
-    print(f"Fetching icon from {icon_url}", tag='FETCH', tag_color='magenta')
+
+    IconImage = Download(icon_url, ".ico")
     try:
-        response = requests.get(icon_url)
+        response = requests.get(IconImage)
         response.raise_for_status()
         icon_data = BytesIO(response.content)
         icon = Image.open(icon_data)
         icon_photo = ImageTk.PhotoImage(icon)
         root.iconphoto(True, icon_photo)
     except requests.exceptions.RequestException as e:
-        print(f"Unable to fetch icon from {icon_url}: {e}", color="white", tag='FATAL ERROR', background="red", tag_color='white')
+        print(f"Icon Fail: {e}", tag='ICON_FATAL_ERROR', background="red", color="magenta", tag_color='magenta')
         exit(1)
 
     print("Registering App", tag='SUCCESS', tag_color='green')
