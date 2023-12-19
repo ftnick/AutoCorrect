@@ -1,3 +1,5 @@
+LocalVersion = "PublicRelease1.2"
+
 import requests
 import os
 import configparser
@@ -37,6 +39,15 @@ def GetConfig(section, setting):
     except configparser.Error as e:
         print(f"Error parsing config file: {e}", tag="GetConfig()", tag_color='yellow')
         return
+    
+SyncCheck = GetConfig("Info", "Version")
+if SyncCheck != LocalVersion and SyncCheck:
+    alert(text="Your script version is unsynchronized. It is imperative that you promptly update the local script or execute the update file. Running outdated scripts is strictly unsupported and may lead to system instability.", title='ERROR_SYNC', button='OK')
+    print("DeSynced From CONFIG", tag='VERSIONSYNC', tag_color='red')
+    sys.exit(1)
+else:
+    print(f"Confirmed Version Sync ({SyncCheck})", tag='VERSIONSYNC', tag_color='green')
+
     
 ShutdownCheck = GetConfig("Communication", "Shutdown")
 if ShutdownCheck != "No" and ShutdownCheck:
