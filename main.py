@@ -1,4 +1,4 @@
-LocalVersion = "PublicRelease1.4"
+LocalVersion = "PublicRelease2.0"
 
 import requests
 import os
