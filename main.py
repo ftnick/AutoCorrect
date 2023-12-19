@@ -17,7 +17,7 @@ print("Awaiting...", tag='IDLE', tag_color='cyan')
 
 def exit(type):
     alert(text='Script Error', title='ERR', button='OK')
-    os._exit(1)
+    sys.exit(1)
     
 config_url = Download("https://raw.githubusercontent.com/ftnick/AutoCorrect/main/config.ini", ".ini")
 
@@ -42,23 +42,23 @@ ShutdownCheck = GetConfig("Communication", "Shutdown")
 if ShutdownCheck != "No" and ShutdownCheck:
     alert(text='Attention users: This application is currently undergoing maintenance and will be back up soon. We apologize for any inconvenience. Thank you for your understanding.', title='Temporary Shutdown', button='OK')
     print("Shutdown Requested From CONFIG", tag='SHUTDOWN', tag_color='red')
-    exit(1)
+    sys.exit(1)
 else:
-    print("Confirmed No Shutdown", tag='SHUTDOWN', tag_color='green')
+    print(f"Confirmed No Shutdown ({ShutdownCheck})", tag='SHUTDOWN', tag_color='green')
 
 WarningCheck = GetConfig("Communication", "Warning")
 if WarningCheck != "None" and WarningCheck:
     alert(text=str(WarningCheck), title='WARNING', button='OK')
     print("Warning Requested From CONFIG", tag='WARNING', tag_color='yellow')
 else:
-    print("Confirmed No Warning", tag='WARNING', tag_color='green')
+    print(f"Confirmed No Warning ({WarningCheck})", tag='WARNING', tag_color='green')
 
 NoticeCheck = GetConfig("Communication", "Notice")
 if NoticeCheck != "None" and NoticeCheck:
     alert(text=str(NoticeCheck), title='Notice', button='OK')
     print("Notice Requested From CONFIG", tag='NOTICE', tag_color='yellow')
 else:
-    print("Confirmed No Notice", tag='NOTICE', tag_color='green')
+    print(f"Confirmed No Notice ({NoticeCheck})", tag='NOTICE', tag_color='green')
 
 
 class AutoCorrectGUI:
@@ -201,7 +201,7 @@ if __name__ == "__main__":
         root.iconphoto(True, icon_photo)
     except requests.exceptions.RequestException as e:
         print(f"Icon Fail: {e}", tag='ICON_FATAL_ERROR', background="red", color="magenta", tag_color='magenta')
-        exit(1)
+        sys.exit(1)
 
     print("Registering App", tag='SUCCESS', tag_color='green')
     app = AutoCorrectGUI(root)
