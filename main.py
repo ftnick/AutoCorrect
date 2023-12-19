@@ -1,4 +1,4 @@
-LocalVersion = "PublicRelease1.2"
+LocalVersion = "PublicRelease1.4"
 
 import requests
 import os
@@ -42,7 +42,7 @@ def GetConfig(section, setting):
     
 SyncCheck = GetConfig("Info", "Version")
 if SyncCheck != LocalVersion and SyncCheck:
-    alert(text="Your script version is unsynchronized. It is imperative that you promptly update the local script or execute the update file. Running outdated scripts is strictly unsupported and may lead to system instability.", title='ERROR_SYNC', button='OK')
+    alert(text="Your script version is currently unsynchronized. This is likely an error on our end. Please allow a few minutes for all scripts to synchronize with the website. We apologize for any inconvenience.", title='ERROR_SYNC', button='OK')
     print("DeSynced From CONFIG", tag='VERSIONSYNC', tag_color='red')
     sys.exit(1)
 else:
